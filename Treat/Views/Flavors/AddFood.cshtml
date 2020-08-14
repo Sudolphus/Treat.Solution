@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Treat.Models.Flavor
+
+@using (Html.BeginForm())
+{
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Add A Food To @Html.DisplayFor(f => f.Name)</h5>
+    </div>
+    <div class="card-body form-group">
+      @Html.Label("Select Food")
+      @Html.DropDownList("FoodId")
+    </div>
+    <div class="card-footer row">
+      <div class="col-md-1">
+        <input type="submit" value="Add Food" class="btn btn-info" />
+      </div>
+      <div class="col-md-1">
+        @Html.ActionLink("Cancel", "Details", "Flavors", new { id = Model.FlavorId }, new { @class="btn btn-warning"})
+      </div>
+    </div>
+  </div>
+}
