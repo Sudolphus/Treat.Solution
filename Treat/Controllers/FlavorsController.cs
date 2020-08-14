@@ -59,7 +59,7 @@ namespace Treat.Controllers
     public ActionResult Edit(int id)
     {
       Flavor flavor = _db.Flavors.First(f => f.FlavorId == id);
-      return RedirectToAction("Details", new { id = flavor.FlavorId });
+      return View(flavor);
     }
 
     [Authorize]

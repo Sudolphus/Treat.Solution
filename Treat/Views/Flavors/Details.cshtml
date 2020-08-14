@@ -25,10 +25,16 @@
     }
   </div>
   <div class="card-footer">
-    @Html.ActionLink("Edit", "Edit", "Flavors", new { id = Model.FlavorId }, new { @class="btn btn-info"})
-    @using (Html.BeginForm("Delete", "Flavors", FormMethod.Post))
-    {
-      <input type="submit" value="Delete" class="btn btn-alert" />
-    }
+    <div class="row">
+      <div class="col-md-1">
+        @Html.ActionLink("Edit", "Edit", "Flavors", new { id = Model.FlavorId }, new { @class="btn btn-info"})
+      </div>
+      <div class="col-md-1">
+        @using (Html.BeginForm("Delete", "Flavors", new { id = Model.FlavorId }, FormMethod.Post))
+        {
+          <input type="submit" value="Delete" class="btn btn-warning" />
+        }
+      </div>
+    </div>
   </div>
 </div>

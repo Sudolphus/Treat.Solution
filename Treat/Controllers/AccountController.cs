@@ -32,6 +32,11 @@ namespace Treat.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult Login()
+    {
+      return RedirectToAction("Index");
+    }
+
     [HttpPost]
     public async Task<ActionResult> Login(LoginViewModel model)
     {
