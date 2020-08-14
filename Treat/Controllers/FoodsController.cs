@@ -32,5 +32,20 @@ namespace Treat.Controllers
         .OrderBy(food => food.Name);
       return View(foodList);
     }
+
+    [Authorize]
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult Create(Food food)
+    {
+      _db.Foods.Add(food);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = food.FoodId });
+    }
   }
 }
