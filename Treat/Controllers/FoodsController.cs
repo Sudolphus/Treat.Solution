@@ -47,5 +47,13 @@ namespace Treat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = food.FoodId });
     }
+
+    public ActionResult Details(int id)
+    {
+      Food food = _db.Foods
+        .Include(f => f.Flavors)
+        .ThenInclude(join => join.Flavor)
+        .First(f => f.FoodId == id);
+    }
   }
 }
