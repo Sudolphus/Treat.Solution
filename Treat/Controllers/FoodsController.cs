@@ -54,6 +54,7 @@ namespace Treat.Controllers
         .Include(f => f.Flavors)
         .ThenInclude(join => join.Flavor)
         .First(f => f.FoodId == id);
+      return View(food);
     }
   }
 }
