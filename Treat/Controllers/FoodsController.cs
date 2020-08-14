@@ -112,5 +112,15 @@ namespace Treat.Controllers
       }
       return RedirectToAction("Details", new { id = food.FoodId });
     }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult RemoveFlavor(int id, int joinId)
+    {
+      FlavorFood joinEntry = _db.FlavorFood.First(entry => entry.FlavorFoodId == joinId);
+      _db.FlavorFood.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = id });
+    }
   }
 }
