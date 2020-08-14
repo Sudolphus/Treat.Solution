@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Treat.Models
+@model IEnumerable<Treat.Models.Food>
+
+<h2>The Index of Foods</h2>
+
+@if(Model.Any())
+{
+  <div class="card-group">
+    @foreach(Food food in Model)
+    {
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">@food.Name</h5>
+        </div>
+        <div class="card-body">
+          @foreach(FlavorFood join in Model.Flavors)
+          {
+            <p><i>@join.Flavor.Name</i></p>
+          }
+        </div>
+        <div class="card-footer">
+          @Html.ActionLink("Details", "Details", "Foods", new { id = food.FoodId }, new {@class="stretched-link"})
+        </div>
+      </div>
+    }
+  </div>
+}
+else
+{
+  <p><i>No Foods Added</i></p>
+}
