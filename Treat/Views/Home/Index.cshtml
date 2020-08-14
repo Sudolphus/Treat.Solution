@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Treat.Models
+
+<h2>Treats</h2>
+<ul>
+  @foreach(Food food in ViewBag.FoodList)
+  {
+    <li>@Html.ActionLink($"{food.Name}", "Details", "Foods", new { id = food.FoodId })</li>
+  }
+</ul>
+
+<h2>Flavors</h2>
+<ul>
+  @foreach(Flavor flavor in ViewBag.FlavorList)
+  {
+    <li>@Html.ActionLink($"{flavor.Name}", "Details", "Flavors", new { id = flavor.FlavorId })</li>
+  }
+</ul>
