@@ -13,8 +13,8 @@
       <div class="page-header">
         <h1>Pierre's Treats</h1>
       </div>
-      <div class="navbar navbar-expand-sm bg-info navbar-dark sticky-top">
-        <ul class="navbar-nav">
+      <nav class="navbar navbar-expand-sm bg-info navbar-dark sticky-top row">
+        <ul class="navbar-nav col-md-8">
           <li class="nav-item">
             @Html.ActionLink("Home", "Index", "Home", null, new { @class="nav-link" })
           </li>
@@ -36,7 +36,16 @@
             </div>
           </li>
         </ul>
-      </div>
+        <form action="/" method="post" class="form-inline col-md-4">
+          <select name="searchOption" id="searchOption">
+            <option value="all">Search All</option>
+            <option value="foods">Search Foods</option>
+            <option value="flavors">Search Flavors</option>
+          </select>
+          <input type="search" name="searchString" id="searchString" placeholder="Search" />
+          <button type="submit" class="btn btn-secondary">Search</button>
+        </form>
+      </nav>
       @RenderBody()
     </div>
   </body>

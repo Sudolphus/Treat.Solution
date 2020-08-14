@@ -15,19 +15,15 @@ namespace Treat.Controllers
     }
 
     [HttpGet("/")]
-    public ActionResult Index(string foodName, string flavorName)
+    public ActionResult Index(string searchString)
     {
       IQueryable<Food> foodQuery = _db.Foods;
       IQueryable<Flavor> flavorQuery = _db.Flavors;
-      if (!string.IsNullOrEmpty(foodName))
+      if (!string.IsNullOrEmpty(searchString))
       {
-        Regex foodSearch = new Regex(foodName, RegexOptions.IgnoreCase);
-        foodQuery = foodQuery.Where(f => foodSearch.IsMatch(f.Name));
-      }
-      if (!string.IsNullOrEmpty(flavorName))
-      {
-        Regex flavorSearch = new Regex(flavorName, RegexOptions.IgnoreCase);
-        flavorQuery = flavorQuery.Where(f => flavorSearch.IsMatch(f.Name));
+        Regex search = new Regex(searchString, RegexOptions.IgnoreCase);
+        foodQuery = foodQuery.Where(f => search.IsMatch(f.Name));
+        flavorQuery = flavorQuery.Where(f => search.IsMatch(f.Name));
       }
       IEnumerable<Food> foodList = foodQuery
         .ToList()
@@ -38,6 +34,27 @@ namespace Treat.Controllers
       ViewBag.FoodList = foodList;
       ViewBag.FlavorList = flavorList;
       return View();
+    }
+
+    [HttpPost]
+    public ActionResult Index(string searchOption, string searchString)
+    {
+      if (searchOption == "all")
+      {
+        return RedirectToAction("Index", new { searchString = searchString});
+      }
+      else if (searchOption == "foods")
+      {
+        return RedirectToAction("Index", "Foods", new { foodName = searchString });
+      }
+      else if (searchOption == "flavors")
+      {
+        return RedirectToAction("Index", "Flavors", new { flavorName = searchString });
+      }
+      else
+      {
+        return RedirectToAction("Index");
+      }
     }
   }
 }
