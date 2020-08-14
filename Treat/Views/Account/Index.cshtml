@@ -15,14 +15,8 @@
 }
 else
 {
-  <div class="row">
-    <div class="col-md-6">
-      <h5>Login</h5>
-      @Html.Partial("Login")
-    </div>
-    <div class="col-md-6">
-      <h5>Register</h5>
-      @Html.Partial("Register")
-    </div>
+  <div class="card-deck">
+    @Html.Partial("Login")
+    @Html.Partial("Register")
   </div>
 }
