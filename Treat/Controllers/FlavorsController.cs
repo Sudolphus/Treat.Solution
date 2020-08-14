@@ -30,5 +30,31 @@ namespace Treat.Controllers
         .OrderBy(f => f.Name);
       return View(flavorList);
     }
+
+    [Authorize]
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult Create(Flavor flavor)
+    {
+      _db.Flavors.Add(flavor);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
+    }
+
+    public ActionResult Details(int id)
+    {
+      Flavor flavor = _db.Flavors
+        .Include(f => f.Foods)
+        .ThenInclude(join => join.Food)
+        .First(f => f.FlavorId == id);
+      return View(flavor);
+    }
+
+    
   }
 }
