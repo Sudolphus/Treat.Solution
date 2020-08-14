@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+
+<h2>Account Page</h2>
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Hello, @User.Identity.Name</h4>
+  @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+  {
+    <input type="submit" value="Log Out" class="btn btn-danger" />
+  }
+}
+else
+{
+  <div class="row">
+    <div class="col-md-6">
+      @Html.Partial("Login")
+    </div>
+    <div class="col-md-6">
+      @Html.Partial("Register")
+    </div>
+  </div>
+}
