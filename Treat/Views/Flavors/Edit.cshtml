@@ -13,9 +13,9 @@
     <div class="card-body form-group">
       @Html.HiddenFor(f => f.FlavorId)
       @Html.LabelFor(f => f.Name)
-      @Html.TextBoxFor(f => f.Name, new { @class="form-control" })
+      @Html.TextBoxFor(f => f.Name, new { @class="form-control", @required=true })
     </div>
-    <div class="card-footer">
+    <div class="card-footer btn-group">
       <input type="submit" value="Save Changes" class="btn btn-info" />
       @Html.ActionLink("Cancel", "Details", "Flavors", new { id = Model.FlavorId }, new { @class="btn btn-alert" })
     </div>
