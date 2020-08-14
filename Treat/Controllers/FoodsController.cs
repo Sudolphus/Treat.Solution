@@ -56,5 +56,31 @@ namespace Treat.Controllers
         .First(f => f.FoodId == id);
       return View(food);
     }
+
+    [Authorize]
+    public ActionResult Edit(int id)
+    {
+      Food food = _db.Foods.First(f => f.FoodId == id);
+      return View(food);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult Edit(Food food)
+    {
+      _db.Entry(food).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = food.FoodId });
+    }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult Delete(int id)
+    {
+      Food food = _db.Foods.First(f => f.FoodId == id);
+      _db.Foods.Remove(food);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

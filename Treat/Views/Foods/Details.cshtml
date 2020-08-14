@@ -26,6 +26,9 @@
   </div>
   <div class="card-footer">
     @Html.ActionLink("Edit", "Edit", "Foods", new { id = Model.FoodId }, new { @class="btn btn-info"})
-    @Html.ActionLink("Delete", "Delete", "Foods", new { id = Model.FoodId }, new { @class="btn btn-danger" })
+    @using (Html.BeginForm("Delete", "Foods", FormMethod.Post))
+    {
+      <input type="submit" value="Delete" class="btn btn-alert" />
+    }
   </div>
 </div>
