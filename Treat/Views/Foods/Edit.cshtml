@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Treat.Models.Food
+
+@using (Html.BeginForm("Edit", "Foods", FormMethod.Post))
+{
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Editting @Html.DisplayFor(f => f.Name)</h5>
+    </div>
+    <div class="card-body form-group">
+      @Html.HiddenFor(f => f.FoodId)
+      @Html.LabelFor(f => f.Name)
+      @Html.TextBoxFor(f => f.Name, new {@class="form-control"})
+    </div>
+    <div class="card-footer">
+      <input type="submit" value="Save Changes" class="btn btn-info" />
+      @Html.ActionLink("Cancel", "Details", "Foods", new { id = Model.FoodId }, new { @class="btn btn-alert"})
+    </div>
+  </div>
+}
