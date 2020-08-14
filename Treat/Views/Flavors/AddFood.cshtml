@@ -11,6 +11,8 @@
       <h5 class="card-title">Add A Food To @Html.DisplayFor(f => f.Name)</h5>
     </div>
     <div class="card-body form-group">
+      @Html.HiddenFor(f => f.FlavorId)
+      s@Html.HiddenFor(f => f.Name)
       @Html.Label("Select Food")
       @Html.DropDownList("FoodId")
     </div>
