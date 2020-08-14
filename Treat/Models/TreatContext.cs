@@ -5,9 +5,9 @@ namespace Treat.Models
 {
   public class TreatContext : IdentityDbContext<ApplicationUser>
   {
-    public DbSet<Treat> Treats { get; set; }
+    public DbSet<Food> Foods { get; set; }
     public DbSet<Flavor> Flavors { get; set; }
-    public DbSet<FlavorTreat> FlavorTreat { get; set; }
+    public DbSet<FlavorFood> FlavorFood { get; set; }
 
     public TreatContext(DbContextOptions options) : base(options) { }
   }
