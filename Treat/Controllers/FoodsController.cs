@@ -99,10 +99,9 @@ namespace Treat.Controllers
     public ActionResult AddFlavor(Food food, int flavorId)
     {
       Flavor flavor = _db.Flavors.First(f => f.FlavorId == flavorId);
-      FlavorFood join = null;
       try
       {
-        join = _db.FlavorFood
+        FlavorFood join = _db.FlavorFood
           .Where(entry => entry.FoodId == food.FoodId)
           .First(entry => entry.FlavorId == flavorId);
       }

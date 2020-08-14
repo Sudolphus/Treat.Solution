@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,36 @@ namespace Treat.Controllers
       _db.Flavors.Remove(flavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    [Authorize]
+    public ActionResult AddFood(int id)
+    {
+      Flavor flavor = _db.Flavors.First(f => f.FlavorId == id);
+      IEnumerable<Food> foodList = _db.Foods
+        .ToList()
+        .OrderBy(f => f.Name);
+      ViewBag.FoodId = new SelectList(foodList, "FoodId", "Name");
+      return View(flavor);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult AddFood(Flavor flavor, int foodId)
+    {
+      Food food = _db.Foods.First(f => f.FoodId == foodId);
+      try
+      {
+        FlavorFood join = _db.FlavorFood
+          .Where(entry => entry.FoodId == foodId)
+          .First(entry => entry.FlavorId == flavor.FlavorId);
+      }
+      catch
+      {
+        _db.FlavorFood.Add(new FlavorFood() { FoodId = foodId, FlavorId = flavor.FlavorId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
   }
 }
