@@ -6,11 +6,11 @@ namespace Treat.Models
   {
     public Flavor()
     {
-      this.Treats = new HashSet<Treat>();
+      this.Treats = new HashSet<FlavorTreat>();
     }
 
     public int FlavorId { get; set; }
     public string Name { get; set; }
-    public ICollection<Treat> Treats { get; set; }
+    public ICollection<FlavorTreat> Treats { get; set; }
   }
 }
