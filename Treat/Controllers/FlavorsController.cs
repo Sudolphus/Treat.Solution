@@ -55,6 +55,20 @@ namespace Treat.Controllers
       return View(flavor);
     }
 
-    
+    [Authorize]
+    public ActionResult Edit(int id)
+    {
+      Flavor flavor = _db.Flavors.First(f => f.FlavorId == id);
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
+    }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult Edit(Flavor flavor)
+    {
+      _db.Entry(flavor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
+    }
   }
 }
