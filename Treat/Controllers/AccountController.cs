@@ -23,5 +23,27 @@ namespace Treat.Controllers
     {
       return View();
     }
+
+    [HttpPost]
+    public async Task<ActionResult> Register(RegisterViewModel model)
+    {
+      var user = new ApplicationUser { UserName = model.UserName };
+      await _userManager.CreateAsync(user, model.Password);
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Login(LoginViewModel model)
+    {
+      await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Logout()
+    {
+      await _signInManager.SignOutAsync();
+      return RedirectToAction("Index");
+    }
   }
 }
