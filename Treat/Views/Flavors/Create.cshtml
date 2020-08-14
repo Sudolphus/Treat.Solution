@@ -2,11 +2,11 @@
   Layout = "_Layout";
 }
 
-@model Treat.Models.Food
+@model Treat.Models.Flavor
 
-<h2>Add a food to the database:</h2>
+<h2>Add a flavor to the database</h2>
 
-@using (Html.BeginForm("Create", "Foods", FormMethod.Post))
+@using (Html.BeginForm("Create", "Flavors", FormMethod.Post))
 {
   <div class="card">
     <div class="card-body form-group">
@@ -14,7 +14,7 @@
       @Html.TextBoxFor(f => f.Name, new {@class="form-control", @required=true})
     </div>
     <div class="card-footer">
-      <input type="submit" value="Add Food" class="btn btn-primary" />
+      <input type="submit" value="Add Flavor" class="btn btn-primary" />
     </div>
   </div>
 }
