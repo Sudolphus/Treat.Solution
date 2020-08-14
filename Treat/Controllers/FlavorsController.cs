@@ -70,5 +70,15 @@ namespace Treat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
+
+    [Authorize]
+    [HttpPost]
+    public ActionResult Delete(int id)
+    {
+      Flavor flavor = _db.Flavors.First(f => f.FlavorId == id);
+      _db.Flavors.Remove(flavor);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
