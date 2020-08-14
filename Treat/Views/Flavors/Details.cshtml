@@ -19,7 +19,13 @@
       <ul>
         @foreach(var join in Model.Foods)
         {
-          <li>@Html.ActionLink($"{join.Food.Name}", "Details", "Foods", new { id = join.FoodId }, new { @class="card-link" })</li>
+          <li>
+            @Html.ActionLink($"{join.Food.Name}", "Details", "Foods", new { id = join.FoodId }, new { @class="card-link" })
+            @using (Html.BeginForm("RemoveFood", "Flavors", new { id = Model.FlavorId, joinId = join.FlavorFoodId }, FormMethod.Post))
+            {
+              <input type="submit" value="Remove This Food" class="btn btn-warning" />
+            }
+          </li>
         }
       </ul>
     }
